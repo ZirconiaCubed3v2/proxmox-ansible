@@ -1,19 +1,26 @@
 ---
 - hosts: pvenodes
   user: root
-  get_checksum: false
   tasks:
     - name: Update apt repo and cache on all Debian/Ubuntu boxes
+      args:
+        get_checksum: false
       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
 
     - name: Upgrade all packages on servers
+      args:
+        get_checksum: false
       apt: upgrade=dist force_apt_get=yes
 
     - name: Check if a reboot is needed on all servers
+      args:
+        get_checksum: false
       register: reboot_required_file
       stat: path=/var/run/reboot-required get_md5=no
 
     - name: Reboot the box if kernel updated
+      args:
+        get_checksum: false
       reboot:
         msg: "Reboot initiated by Ansible for kernel updates"
         connect_timeout: 5
