@@ -9,10 +9,8 @@
       apt: upgrade=dist force_apt_get=yes
 
     - name: Check if a reboot is needed on all servers
-      args:
-        get_checksum: false
       register: reboot_required_file
-      stat: path=/var/run/reboot-required get_md5=no
+      stat: path=/var/run/reboot-required get_checksum=no
 
     - name: Reboot the box if kernel updated
       reboot:
