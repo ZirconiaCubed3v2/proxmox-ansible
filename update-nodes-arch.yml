@@ -1,6 +1,6 @@
 ---
 - hosts: swarm
-  user: user
+  user: root
   tasks:
     - name: Update pacman repos and cache on all Arch machines
       community.general.pacman:
