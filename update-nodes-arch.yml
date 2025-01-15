@@ -1,6 +1,8 @@
 ---
 - hosts: swarm
-  user: root
+  user: user
+  become_user: root
+  become_method: sudo
   tasks:
     - name: Update pacman repos and cache on all Arch machines
       become: true
