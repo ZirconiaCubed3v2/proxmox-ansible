@@ -1,28 +1,28 @@
 ---
 - hosts: swarm
-  user: user
-  become_user: root
-  become_method: sudo
+  user: root
+  # become_user: root
+  # become_method: sudo
   tasks:
     - name: Update pacman repos and cache on all Arch machines
-      become: true
+      # become: true
       community.general.pacman:
         update_cache: true
         upgrade: false
 
     - name: Upgrade all packages on machines
-      become: true
+      # become: true
       community.general.pacman:
         update_cache: false
         upgrade: true
 
     - name: Check if a reboot is needed on all machines
-      become: true
+      # become: true
       register: reboot_required_file
       stat: path=/var/run/reboot-required get_checksum=no
 
     - name: Reboot the box if kernel updated
-      become: true
+      # become: true
       reboot:
         msg: "Reboot initiated by Ansible for kernel updates"
         connect_timeout: 5
